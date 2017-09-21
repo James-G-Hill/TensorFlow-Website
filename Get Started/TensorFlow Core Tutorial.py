@@ -62,18 +62,26 @@ loss = tf.reduce_sum(square_deltas)
 print(sess.run(loss, {x: [1, 2, 3, 4], y: [0, -1, -2, -3]}))
 
 # Variables can be changed using operations
+# The new values below are the ideal values to get a loss of 0
 fixW = tf.assign(W, [-1.])
 fixb = tf.assign(b, [1.])
 sess.run([fixW, fixb])
 print(sess.run(loss, {x: [1, 2, 3, 4], y: [0, -1, -2, -3]}))
+# This results in '0' because x & y values cancel each other out
 
-# Optimizrs can slowly change variables to minimize a loss function
+# Optimizers can slowly change variables to minimize a loss function
 # The simplest optimizer is 'gradient descent'
 optimizer = tf.train.GradientDescentOptimizer(0.01)
 train = optimizer.minimize(loss)
 
-sess.run(init)  # this resets values to incorrect defaults
+# this resets values to incorrect defaults (not the ideal values)
+sess.run(init)
+
+# Now run through 1000 times optimizing
 for i in range(1000):
     sess.run(train, {x: [1, 2, 3, 4], y: [0, -1, -2, -3]})
 
 print(sess.run([W, b]))
+# The results will be close to 1 & -1 (e.g. 0.99999* etc.)
+# The values of W and b are adjusted to obtain these figures
+# So that x and y can be matched closely to the arrays passed in
