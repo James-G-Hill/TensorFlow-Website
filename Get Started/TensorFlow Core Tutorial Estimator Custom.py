@@ -8,7 +8,8 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
-# We have to define our model
+# We have to define our model function
+# This returns a custom estimator specification
 def model_fn(features, labels, mode):
 
     # Build a linear model to predict values

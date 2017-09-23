@@ -36,12 +36,15 @@ y_eval = np.array([-1.01, -4.1, -7, 0.])
 
 # 'input_fn' uses the training arrays
 # The number of iterations is given below during training
+# When 'x' is given, output should be 'y'
 input_fn = tf.estimator.inputs.numpy_input_fn(
     {"x": x_train}, y_train, batch_size=4, num_epochs=None, shuffle=True)
+
 # 'train_input_fn' also uses the training arrays
 # A number of epochs is given so that this can evaluated
 train_input_fn = tf.estimator.inputs.numpy_input_fn(
     {"x": x_train}, y_train, batch_size=4, num_epochs=1000, shuffle=False)
+
 # 'eval_input_fn' will be used to test the model on new data
 # The evaluation data is passed in
 eval_input_fn = tf.estimator.inputs.numpy_input_fn(
@@ -50,15 +53,20 @@ eval_input_fn = tf.estimator.inputs.numpy_input_fn(
 # We can now train with 1000 steps
 # 'input_fun' below is both the parameter name & the variable name
 # 'input_fun' from above is being passed into 'input_fn'
+# The training will produce 'y' when given 'x'
 estimator.train(input_fn=input_fn, steps=1000)
 
 # Now we can evaluate our model
 # The training input is tested over 1000 epochs
 # This will be accurate because it is identical to the input used to train
+# 'x_train' will result in 'y_train' & this is exactly what the estimator
+# expects
 train_metrics = estimator.evaluate(input_fn=train_input_fn)
+
 # The evaluation input is also tested over 1000 epochs
 # This tests whether the ratios found in the trained input data
 # are successfully applied to the new data
+# How close does the estimator come to 'y_eval' given 'x_eval'?
 eval_metrics = estimator.evaluate(input_fn=eval_input_fn)
 
 print("train metrics: %r" % train_metrics)
