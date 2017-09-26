@@ -5,7 +5,7 @@ import os
 ###
 # Variables
 
-no_of_training_iterations = 20000  # 20000 for full training
+no_of_training_iterations = 20000
 
 ###
 
