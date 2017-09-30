@@ -238,7 +238,7 @@ if __name__ == '__main__':
     parser.add_argument(
         '--max_steps',
         type=int,
-        default=100,  # should be 2000
+        default=2000,  # should be 2000
         help='Number of steps to run trainer.'
     )
 
