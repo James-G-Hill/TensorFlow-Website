@@ -41,4 +41,19 @@ def main:
         target_dtype=np.int,
         features_dtype=np.float32)
 
+    # Instantiate a deep neural network classifier
+
+    # Specify all features have real-value data
+    # Shape is for the 4 different features
+    feature_columns = [tf.feature_column.numeric_column("x", shape=[4])]
+    
+    # The classifier is created as a deep neural network
+    # The NN has 3 layers of 10, 20 and 10 neurons.
+    # The NN outputs 3 different results, relating to the 3 species of flowers
+    classifier = tf.estimator.DNNClassifier(
+        feature_columns=feature_columns,
+        hidden_units=[10, 20, 10],
+        n_classes=3,
+        model_dir="/tmp/iris_model")
+
     
