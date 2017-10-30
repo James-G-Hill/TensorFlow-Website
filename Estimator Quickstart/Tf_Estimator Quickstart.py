@@ -17,15 +17,16 @@ IRIS_TRAINING_URL = "http://download.tensorflow.org/data/iris_training.csv"
 IRIS_TEST = "iris_test.csv"
 IRIS_TEST_URL = "http://download.tensorflow.org/data/iris_test.csv"
 
-def main:
+
+def main():
 
     if not os.path.exists(IRIS_TRAINING):
-        raw = urllib.urlopen(IRIS_TRAINING_URL).read()
+        raw = urllib.request.urlopen(IRIS_TRAINING_URL).read().decode()
         with open(IRIS_TRAINING, 'w') as f:
             f.write(raw)
 
     if not os.path.exists(IRIS_TEST):
-        raw = urllib.urlopen(IRIS_TEST_URL).read()
+        raw = urllib.request.urlopen(IRIS_TEST_URL).read().decode()
         with open(IRIS_TEST, 'w') as f:
             f.write(raw)
 
@@ -46,7 +47,7 @@ def main:
     # Specify all features have real-value data
     # Shape is for the 4 different features
     feature_columns = [tf.feature_column.numeric_column("x", shape=[4])]
-    
+
     # The classifier is created as a deep neural network
     # The NN has 3 layers of 10, 20 and 10 neurons.
     # The NN outputs 3 different results, relating to the 3 species of flowers
@@ -87,4 +88,6 @@ def main:
 
     print("\nTest Accuracy: {0:f}\n".format(accuracy_score))
 
-    
+
+if __name__ == "__main__":
+    main()
