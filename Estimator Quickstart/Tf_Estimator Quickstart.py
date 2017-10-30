@@ -72,4 +72,19 @@ def main:
         input_fn=train_input_fn,
         steps=2000)
 
+    # Evaluate Model Accuracy
+
+    # Define the test inputs
+    test_input_fn = tf.estimator.inputs.numpy_input_fn(
+        x={"x": np.array(test_set.data)},
+        y=np.array(test_set.target),
+        num_epochs=1,
+        shuffle=False)
+
+    # Evaluate accuracy
+    accuracy_score = classifier.evaluate(
+        input_fn=test_input_fn)["accuracy"]
+
+    print("\nTest Accuracy: {0:f}\n".format(accuracy_score))
+
     
