@@ -56,4 +56,20 @@ def main:
         n_classes=3,
         model_dir="/tmp/iris_model")
 
+    # Create an input function for the classifier
+    train_input_fn = tf.estimator.inputs.numpy_input_fn(
+        x={"x": np.array(training_set.data)},
+        y=np.array(training_set.target),
+        num_epochs=None,
+        shuffle=True)
+
+    # Now fit the classifier to the training data
+
+    # Train model
+    # The model state is preserved in the classifier
+    # You can therefore train iteratively
+    classifier.train(
+        input_fn=train_input_fn,
+        steps=2000)
+
     
