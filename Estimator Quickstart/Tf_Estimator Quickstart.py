@@ -92,7 +92,8 @@ def main():
 
     new_samples = np.array(
         [[6.4, 3.2, 4.5, 1.5],
-         [5.8, 3.1, 5.0, 1.7]], dtype=np.float32)
+         [5.8, 3.1, 5.0, 1.7]],
+        dtype=np.float32)
 
     predict_input_fn = tf.estimator.inputs.numpy_input_fn(
         x={"x": new_samples},
